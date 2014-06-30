@@ -1,0 +1,19 @@
+WarpMesaGL vers. alpha minus 1.47
+
+Port to OS/2 PM of Mesa by Brian Paul (www.mesa3d.org)
+Mesa is a 3-D multyplatform graphics library with an API which is
+very similar to that of OpenGL. 
+
+"WarpMesaGL" is current work name for port of original Mesa.
+The name "Mesa" in OS/2 is currently used for electronic table, 
+so "WarpMesaGL" is used to eliminate misunderstanding. 
+
+Original Mesa version: 5.1 (c) Brian Paul
+
+Homepage - http://www.laser.ru/soft/WarpMesaGL
+
+further info: see \DOC
+
+SY,
+Evgeny Kotsuba 
+

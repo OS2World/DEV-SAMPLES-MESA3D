@@ -1,0 +1,109 @@
+/* Bitmaps.cpp  */
+#include "basis.h"
+
+int maininit(int argc, char** argv);
+void GLUTCALLBACK display(void);
+void GLUTCALLBACK Reshape(int width,int height);
+
+
+GLint windW, windH;
+
+void GLUTCALLBACK  Reshape(int cx,int cy)
+{
+  GLint m_width;  // °шЁшэр юъэр OpenGL
+  GLint m_height; // т√ёюЄр юъэр OpenGL
+  // Здесь отслеживается изменение размеров
+  m_width  = (GLint)cx;
+  m_height = (GLint)cy;
+
+// Непосредственное отслеживание размеров области вывода OpenGL
+   glViewport(0, 0, m_width, m_height);
+
+// Устанавливаем параметры ортографической проекции
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluOrtho2D(-m_width/4, m_width/4, -m_height/2, m_height/2);
+
+// Делаем текущей видовую матрицу
+  glMatrixMode(GL_MODELVIEW);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// COpenGLView drawing
+
+void GLUTCALLBACK  display(void)
+{
+  // Определяем битовый массив
+  GLubyte Bitmap_logo[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x01, 0xc4, 0xe6, 0x31, 0x00, 0x00,
+    0x00, 0x00, 0x02, 0x24, 0x21, 0x49, 0x00, 0x00,
+    0x00, 0x00, 0x05, 0x94, 0x21, 0x49, 0x00, 0x00,
+    0x00, 0x00, 0x05, 0x15, 0xef, 0x31, 0xc0, 0x00,
+    0x00, 0x00, 0x05, 0x95, 0x29, 0x48, 0x00, 0x00,
+    0x00, 0x00, 0x02, 0x25, 0x29, 0x48, 0x00, 0x00,
+    0x00, 0x00, 0x01, 0xc5, 0xef, 0x30, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x01, 0x12, 0x89, 0x91, 0x4a, 0x19, 0xe9, 0x31,
+    0x01, 0x1a, 0x52, 0x51, 0x6a, 0x25, 0x21, 0x49,
+    0x01, 0x16, 0x72, 0x55, 0x5b, 0xa5, 0xe1, 0x48,
+    0x01, 0x12, 0x52, 0x5b, 0x4a, 0xa5, 0x41, 0xc8,
+    0x01, 0x12, 0x89, 0x91, 0x4b, 0x99, 0xc1, 0x48,
+    0x01, 0x10, 0x00, 0x00, 0x00, 0x00, 0x01, 0x48,
+    0x0f, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x01, 0x30,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+  };
+
+
+  // Здесь вызываются команды рисования "заглушки"
+
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  // Текущий цвет - черный
+  glColor3f(1.0f, 0.0f, 0.0f);
+
+  // Задаем параметры размещения пикселей в памяти
+  glPixelStorei(GL_UNPACK_LSB_FIRST, GL_FALSE);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  // Устанавливаем текущую растровую позицию
+  glRasterPos2i(-16, -10);
+
+  // Выводим битовое изображение в буфер кадра
+  glBitmap(64, 20, (GLfloat)0, (GLfloat)3,
+             (GLfloat)0.0, (GLfloat)0.0,
+             Bitmap_logo);
+
+  glFinish();
+
+  // Осуществляем вывод на экран
+  glutSwapBuffers();
+}
+
+static void Init(void)
+{
+    glClearColor(0.0, 1.0, 0.0, 0.0);
+    glClearIndex(0.0);
+}
+
+
+int maininit(int argc, char **argv)
+{
+    windW = 500;
+    windH = 300;
+   glutInit(&argc, argv);
+   glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+//   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+   glutInitWindowSize (windW, windH);
+   glutInitWindowPosition (150, 100);
+   glutCreateWindow ("Bitmaps ...");
+   Init ();
+    glutReshapeFunc(Reshape);
+    glutDisplayFunc(display);
+
+   return 0;   /* ANSI C requires main to return int. */
+}
+

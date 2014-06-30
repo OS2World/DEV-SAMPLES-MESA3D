@@ -1,0 +1,5 @@
+Mesa Start debug log at Fri Jan 31 12:45:47 2003
+triangle_unfilled_rgba call  _swrast_Triangle
+triangle_unfilled_rgba return  _swrast_Triangle
+triangle_unfilled_rgba call  _swrast_Triangle
+triangle_unfilled_rgba return  _swrast_Triangle

@@ -1,0 +1,36 @@
+/*+--------------------------------------------------------------------------+*/
+/*| GL_TEST.RC Resource File                                                 |*/
+/*+--------------------------------------------------------------------------+*/
+
+#include <os2.h>
+#include "GL_TEST.h"
+
+ICON ID_WINDOW PRELOAD MesaGl.ico
+
+MENU ID_WINDOW PRELOAD
+   {
+        SUBMENU "~File", IDM_FILE
+        BEGIN
+            MENUITEM "~Read",       IDM_FILEOPEN
+            MENUITEM SEPARATOR
+            MENUITEM "~Exit",           IDM_EXITPROG
+        END
+   }
+
+ACCELTABLE ID_WINDOW PRELOAD
+   {
+        VK_F1, IDM_HELPABOUT, VIRTUALKEY
+        VK_F3, IDM_EXITPROG, VIRTUALKEY
+   }
+
+STRINGTABLE PRELOAD
+   {
+   IDS_APPNAME,      "MesaGL Test"
+   IDS_NOREGISTER,   "Window class could not be registered."
+   IDS_NOSTDWINDOWS, "The standard windows could not be created."
+   IDS_NOTHREAD,     "The drawing thread could not be created."
+   IDS_SEMERROR,     "A semaphore error occurred."
+   }
+
+
+
